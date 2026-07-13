@@ -1,0 +1,974 @@
+<title>Bioquímica I — Resumo de Estudo</title>
+<style>
+  :root{
+    --bg:#f5f7f5;
+    --surface:#ffffff;
+    --surface-2:#eef2f0;
+    --text:#1c2a2e;
+    --text-muted:#52666b;
+    --accent:#0e6e66;
+    --accent-soft:#dcefec;
+    --accent-2:#b6812a;
+    --accent-2-soft:#f6ecd8;
+    --danger:#a94438;
+    --danger-soft:#f6e3e0;
+    --line:#dde3e0;
+    --code-bg:#eef2f0;
+    --shadow: 0 1px 2px rgba(20,40,38,0.06), 0 6px 20px rgba(20,40,38,0.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1719;
+      --surface:#172224;
+      --surface-2:#1c2a2c;
+      --text:#e7eeec;
+      --text-muted:#9fb0ae;
+      --accent:#59d6c9;
+      --accent-soft:#183531;
+      --accent-2:#e3a855;
+      --accent-2-soft:#2c2418;
+      --danger:#e2897c;
+      --danger-soft:#2e1e1c;
+      --line:#26373a;
+      --code-bg:#1c2a2c;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f1719;
+    --surface:#172224;
+    --surface-2:#1c2a2c;
+    --text:#e7eeec;
+    --text-muted:#9fb0ae;
+    --accent:#59d6c9;
+    --accent-soft:#183531;
+    --accent-2:#e3a855;
+    --accent-2-soft:#2c2418;
+    --danger:#e2897c;
+    --danger-soft:#2e1e1c;
+    --line:#26373a;
+    --code-bg:#1c2a2c;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#f5f7f5;
+    --surface:#ffffff;
+    --surface-2:#eef2f0;
+    --text:#1c2a2e;
+    --text-muted:#52666b;
+    --accent:#0e6e66;
+    --accent-soft:#dcefec;
+    --accent-2:#b6812a;
+    --accent-2-soft:#f6ecd8;
+    --danger:#a94438;
+    --danger-soft:#f6e3e0;
+    --line:#dde3e0;
+    --code-bg:#eef2f0;
+    --shadow: 0 1px 2px rgba(20,40,38,0.06), 0 6px 20px rgba(20,40,38,0.05);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16.5px;
+    line-height:1.6;
+  }
+  .serif{ font-family: Georgia,"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif; }
+  code, .mono, .chip, .eyebrow, .tag, th{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  a{ color:var(--accent); }
+
+  .shell{
+    display:grid;
+    grid-template-columns: 258px minmax(0,1fr);
+    gap:0;
+    max-width:1180px;
+    margin:0 auto;
+  }
+
+  /* ---- Sidebar ---- */
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    padding:28px 18px 28px 24px;
+    border-right:1px solid var(--line);
+  }
+  .toc-title{
+    font-size:11px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin:0 0 14px;
+  }
+  .toc-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;}
+  .toc-list a{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    text-decoration:none;
+    color:var(--text-muted);
+    font-size:13.5px;
+    padding:6px 8px;
+    border-radius:6px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .toc-list a .num{ font-size:11px; color:var(--text-muted); opacity:.6; min-width:16px;}
+  .toc-list a:hover{ background:var(--surface-2); color:var(--text); }
+  .toc-list a.active{ background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .toc-list a.active .num{ color:var(--accent); opacity:1; }
+
+  /* ---- Main ---- */
+  main{ padding:56px 44px 120px; min-width:0; }
+
+  .titleblock{ margin-bottom:56px; max-width:640px; }
+  .kicker{
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); font-weight:700; margin:0 0 14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block;}
+  h1{
+    font-family: Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    font-size:clamp(30px,4vw,42px);
+    line-height:1.12;
+    margin:0 0 16px;
+    text-wrap:balance;
+    letter-spacing:-.01em;
+  }
+  .titleblock p{ color:var(--text-muted); font-size:16px; max-width:56ch; margin:0 0 6px;}
+  .source-note{
+    margin-top:22px; font-size:12.5px; color:var(--text-muted);
+    border-left:2px solid var(--line); padding-left:12px;
+  }
+
+  section.topic{ max-width:700px; padding-top:64px; margin-top:-16px; border-top:1px solid var(--line); }
+  section.topic:first-of-type{ border-top:none; }
+  .eyebrow{
+    font-size:12px; color:var(--text-muted); letter-spacing:.06em;
+    margin:0 0 6px; display:flex; gap:8px; align-items:center;
+  }
+  .eyebrow .n{ color:var(--accent); font-weight:700; }
+  h2{
+    font-family: Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    font-size:28px; margin:0 0 22px; letter-spacing:-.005em; text-wrap:balance;
+  }
+  h3{
+    font-family: Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    font-size:19px; margin:34px 0 12px; color:var(--text);
+  }
+  h3:first-of-type{ margin-top:8px; }
+  h4{ font-size:14.5px; margin:20px 0 8px; color:var(--text); }
+  p{ margin:0 0 14px; max-width:66ch; }
+  ul, ol{ margin:0 0 16px; padding-left:22px; }
+  li{ margin-bottom:6px; max-width:62ch; }
+  strong{ color:var(--text); }
+
+  .lead{ font-size:16.5px; color:var(--text-muted); margin-bottom:26px; }
+
+  /* callouts */
+  .box{
+    border:1px solid var(--line);
+    background:var(--surface);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+    box-shadow:var(--shadow);
+  }
+  .box h4{ margin-top:0; }
+  .box.accent{ border-color:transparent; background:var(--accent-soft); }
+  .box.accent h4{ color:var(--accent); }
+  .box.warn{ border-color:transparent; background:var(--accent-2-soft); }
+  .box.warn h4{ color:var(--accent-2); }
+  .box.path{ border-color:transparent; background:var(--danger-soft); }
+  .box.path h4{ color:var(--danger); }
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .grid-2{ grid-template-columns:1fr; } }
+
+  /* chips */
+  .chipwrap{ display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 18px; }
+  .chip{
+    font-size:12.5px; padding:4px 10px; border-radius:999px;
+    background:var(--surface-2); border:1px solid var(--line); color:var(--text);
+  }
+  .chip.accent{ background:var(--accent-soft); color:var(--accent); border-color:transparent; font-weight:600;}
+  .chip.warn{ background:var(--accent-2-soft); color:var(--accent-2); border-color:transparent; font-weight:600;}
+
+  /* tables */
+  .tablewrap{ overflow-x:auto; margin:16px 0 22px; border:1px solid var(--line); border-radius:10px; }
+  table{ border-collapse:collapse; width:100%; min-width:520px; font-size:14px; }
+  th,td{ text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th{
+    background:var(--surface-2); color:var(--text-muted); font-weight:600;
+    text-transform:uppercase; font-size:11px; letter-spacing:.04em;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--surface-2); }
+  td.k{ color:var(--accent); font-weight:600; white-space:nowrap; }
+
+  .twocol-list{ columns:2; column-gap:28px; }
+  .twocol-list li{ break-inside:avoid; }
+  @media (max-width:560px){ .twocol-list{ columns:1; } }
+
+  .divider{ height:1px; background:var(--line); margin:28px 0; border:none; }
+
+  footer{
+    max-width:700px; padding:40px 0 0; margin-top:40px; border-top:1px solid var(--line);
+    color:var(--text-muted); font-size:13px;
+  }
+
+  /* mobile layout */
+  @media (max-width:880px){
+    .shell{ grid-template-columns:1fr; }
+    nav.toc{
+      position:static; height:auto; border-right:none; border-bottom:1px solid var(--line);
+      padding:18px 20px;
+    }
+    .toc-list{ flex-direction:row; flex-wrap:wrap; }
+    .toc-list a{ font-size:12.5px; }
+    main{ padding:36px 20px 100px; }
+  }
+
+  .backtotop{
+    position:fixed; right:22px; bottom:22px;
+    width:38px; height:38px; border-radius:50%;
+    background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted); text-decoration:none; font-size:16px;
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .backtotop.show{ opacity:1; pointer-events:auto; }
+</style>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sumário">
+    <p class="toc-title">Sumário</p>
+    <ul class="toc-list" id="tocList">
+      <li><a href="#bioelementos"><span class="num">01</span>Bioelementos</a></li>
+      <li><a href="#biomoleculas"><span class="num">02</span>Biomoléculas</a></li>
+      <li><a href="#sais-minerais"><span class="num">03</span>Sais minerais</a></li>
+      <li><a href="#agua"><span class="num">04</span>Água</a></li>
+      <li><a href="#macromoleculas"><span class="num">05</span>Macromoléculas</a></li>
+      <li><a href="#aminoacidos"><span class="num">06</span>Aminoácidos</a></li>
+      <li><a href="#proteinas"><span class="num">07</span>Proteínas</a></li>
+      <li><a href="#enzimas"><span class="num">08</span>Enzimas</a></li>
+      <li><a href="#carboidratos"><span class="num">09</span>Carboidratos</a></li>
+      <li><a href="#acidos-nucleicos"><span class="num">10</span>ADN &amp; ARN</a></li>
+      <li><a href="#lipidios"><span class="num">11</span>Lipídios</a></li>
+      <li><a href="#vitaminas"><span class="num">12</span>Vitaminas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="titleblock">
+      <p class="kicker"><span class="dot"></span>Bioquímica I</p>
+      <h1>Bioquímica: a base de muitas ciências</h1>
+      <p>Resumo de estudo — bioelementos, biomoléculas, macromoléculas orgânicas (aminoácidos, proteínas, enzimas, carboidratos, ácidos nucleicos, lipídios) e vitaminas.</p>
+      <p class="source-note">Conteúdo extraído integralmente dos slides da disciplina (Dra. Mara Gonçalves Vichietti). Termos originais em espanhol foram traduzidos para o português.</p>
+    </div>
+
+    <!-- 01 BIOELEMENTOS -->
+    <section class="topic" id="bioelementos">
+      <p class="eyebrow"><span class="n">01</span> · Fundamentos</p>
+      <h2>Bioelementos</h2>
+      <p class="lead">A bioquímica é a base de muitas ciências (biologia, medicina, nutrição, farmacologia), do conhecimento do metabolismo e do estudo das moléculas biológicas. Os bioelementos classificam-se em três grupos, conforme sua proporção no organismo.</p>
+
+      <h3>Primários — ~96% da composição dos seres vivos</h3>
+      <div class="chipwrap">
+        <span class="chip accent">Carbono (C)</span>
+        <span class="chip accent">Hidrogênio (H)</span>
+        <span class="chip accent">Oxigênio (O)</span>
+        <span class="chip accent">Nitrogênio (N)</span>
+        <span class="chip accent">Fósforo (P)</span>
+      </div>
+
+      <h3>Secundários — ~3,9% da composição</h3>
+      <div class="chipwrap">
+        <span class="chip">Cálcio (Ca)</span>
+        <span class="chip">Cloro (Cl)</span>
+        <span class="chip">Sódio (Na)</span>
+        <span class="chip">Potássio (K)</span>
+        <span class="chip">Magnésio (Mg)</span>
+      </div>
+
+      <h3>Oligoelementos — traços, &lt;0,1% do peso corporal</h3>
+      <div class="chipwrap">
+        <span class="chip warn">Ferro (Fe)</span>
+        <span class="chip warn">Cobre (Cu)</span>
+        <span class="chip warn">Zinco (Zn)</span>
+        <span class="chip warn">Iodo (I)</span>
+        <span class="chip warn">Selênio (Se)</span>
+        <span class="chip warn">Flúor (F)</span>
+      </div>
+    </section>
+
+    <!-- 02 BIOMOLÉCULAS -->
+    <section class="topic" id="biomoleculas">
+      <p class="eyebrow"><span class="n">02</span> · Classificação</p>
+      <h2>Biomoléculas</h2>
+      <p>As biomoléculas são compostos essenciais que constituem a base de toda forma de vida, participando dos processos biológicos e químicos dos organismos.</p>
+      <div class="grid-2">
+        <div class="box accent">
+          <h4>Orgânicas</h4>
+          <p style="margin:0">Carboidratos, lipídios, proteínas e ácidos nucleicos.</p>
+        </div>
+        <div class="box">
+          <h4>Inorgânicas</h4>
+          <p style="margin:0">Água e sais minerais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 SAIS MINERAIS -->
+    <section class="topic" id="sais-minerais">
+      <p class="eyebrow"><span class="n">03</span> · Biomoléculas inorgânicas</p>
+      <h2>Sais minerais</h2>
+      <p class="lead">Compostos inorgânicos presentes no organismo em quantidade reduzida — cerca de <strong>1% do peso corporal</strong>.</p>
+
+      <h3>Tipos, por quantidade necessária</h3>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Macrominerais</h4>
+          <p style="margin:0">Cálcio (Ca), Fósforo (P), Magnésio (Mg), Potássio (K), Sódio (Na), Cloro (Cl), Enxofre (S)</p>
+        </div>
+        <div class="box">
+          <h4>Oligoelementos / traço (microgramas)</h4>
+          <p style="margin:0">Ferro (Fe), Zinco (Zn), Iodo (I), Selênio (Se), Flúor (F)</p>
+        </div>
+      </div>
+
+      <h3>Funções</h3>
+      <ul>
+        <li><strong>Estruturais</strong> — formam tecidos sólidos como ossos e dentes (cálcio, fósforo, magnésio).</li>
+        <li><strong>Reguladoras</strong> — mantêm o equilíbrio hidrossalino (sódio, potássio, cloro), a pressão osmótica e o pH sanguíneo.</li>
+        <li><strong>Metabólicas</strong> — ativação de enzimas, produção de hormônios, contração muscular.</li>
+      </ul>
+      <p>Outras funções citadas: formação de ossos e dentes; contração muscular; funcionamento do sistema nervoso; constituinte da hemoglobina; formação do suco gástrico; funcionamento da tireoide.</p>
+    </section>
+
+    <!-- 04 ÁGUA -->
+    <section class="topic" id="agua">
+      <p class="eyebrow"><span class="n">04</span> · Biomoléculas inorgânicas</p>
+      <h2>Água</h2>
+      <p class="lead">Composto mais abundante nas células: constitui a maior parte da massa celular e é o <strong>sistema</strong> em que ocorrem as reações químicas vitais, a hidratação e a solubilidade das moléculas do organismo.</p>
+
+      <h3>Propriedades</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Propriedade</th><th>O que significa</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Solvente ideal</td><td>Dissolve ampla variedade de substâncias — meio ideal para reações químicas nos organismos.</td></tr>
+            <tr><td class="k">Estrutura molecular</td><td>1 átomo de oxigênio + 2 de hidrogênio, unidos por pontes/enlaces de hidrogênio.</td></tr>
+            <tr><td class="k">Interação iônica</td><td>Interage com diversos íons, formando compostos estáveis.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Funções no organismo</h3>
+      <ul>
+        <li><strong>Reações químicas</strong> — fundamental para a hidrólise, que decompõe compostos grandes em moléculas simples pela adição de água.</li>
+        <li><strong>Meio de difusão</strong> — transporte de nutrientes, gases e resíduos através das membranas celulares.</li>
+        <li><strong>Reguladora de temperatura</strong> — alto calor específico: absorve e libera grande quantidade de calor sem variar muito de temperatura, regulando a temperatura corporal.</li>
+      </ul>
+    </section>
+
+    <!-- 05 MACROMOLÉCULAS -->
+    <section class="topic" id="macromoleculas">
+      <p class="eyebrow"><span class="n">05</span> · Compostos orgânicos</p>
+      <h2>Macromoléculas</h2>
+      <p>Grandes moléculas formadas pela repetição de unidades menores — os <strong>monômeros</strong>. Incluem proteínas, ácidos nucleicos, carboidratos e lipídios, cada uma com papéis vitais na biologia celular.</p>
+    </section>
+
+    <!-- 06 AMINOÁCIDOS -->
+    <section class="topic" id="aminoacidos">
+      <p class="eyebrow"><span class="n">06</span> · Monômeros das proteínas</p>
+      <h2>Aminoácidos</h2>
+
+      <h3>Estrutura</h3>
+      <div class="chipwrap">
+        <span class="chip accent">Grupo amino (–NH₂)</span>
+        <span class="chip accent">Grupo carboxilo (–COOH)</span>
+        <span class="chip accent">Carbono alfa (Cα)</span>
+        <span class="chip accent">Grupo R (cadeia lateral)</span>
+      </div>
+
+      <h3>Quiralidade</h3>
+      <p>O carbono alfa é assimétrico (ligado a 4 grupos diferentes), o que gera dois isômeros — <strong>L</strong> e <strong>D</strong> — que são imagens especulares um do outro, como um <strong>espelho</strong>, com propriedades biológicas diferentes.</p>
+
+      <h3>Essenciais × Não essenciais</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Essenciais</th><th>Não essenciais</th></tr></thead>
+          <tbody>
+            <tr><td>Isoleucina</td><td>Alanina</td></tr>
+            <tr><td>Leucina</td><td>Arginina</td></tr>
+            <tr><td>Lisina</td><td>Aspargina</td></tr>
+            <tr><td>Metionina</td><td>Ácido aspártico</td></tr>
+            <tr><td>Fenilalanina</td><td>Cisteína</td></tr>
+            <tr><td>Treonina</td><td>Ácido glutâmico</td></tr>
+            <tr><td>Triptofano</td><td>Glicina</td></tr>
+            <tr><td>Valina</td><td>Prolina</td></tr>
+            <tr><td>Histidina <em>(criança)</em></td><td>Serina</td></tr>
+            <tr><td></td><td>Tirosina</td></tr>
+            <tr><td></td><td>Histidina <em>(adulto)</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box warn">
+        <h4>Atenção — Histidina</h4>
+        <p style="margin:0">É <strong>essencial na criança</strong> e <strong>não essencial no adulto</strong> — o próprio organismo adulto passa a sintetizá-la em quantidade suficiente.</p>
+      </div>
+
+      <h3>Condicionalmente essenciais</h3>
+      <p>Tornam-se essenciais em situações especiais (doença, estresse, imaturidade metabólica ou deficiências específicas):</p>
+      <div class="chipwrap">
+        <span class="chip">Glicina</span>
+        <span class="chip">Arginina</span>
+        <span class="chip">Prolina</span>
+        <span class="chip">Cisteína</span>
+        <span class="chip">Tirosina</span>
+        <span class="chip">Serina</span>
+        <span class="chip">Glutamina</span>
+      </div>
+      <p>Exemplo: a <strong>Tirosina</strong> só se torna essencial quando há deficiência na conversão a partir da fenilalanina (ex.: alterações hepáticas/tireoidianas que comprometam essa via).</p>
+
+      <h3>Codificáveis × Modificados</h3>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Codificáveis</h4>
+          <p style="margin:0">Incorporam-se diretamente nas cadeias polipeptídicas, determinados pelo código genético.</p>
+        </div>
+        <div class="box">
+          <h4>Modificados</h4>
+          <p style="margin:0">Após a síntese proteica, sofrem alterações químicas (adição de grupos ou modificação da cadeia lateral).</p>
+        </div>
+      </div>
+
+      <h3>Funções (nomes)</h3>
+      <div class="chipwrap">
+        <span class="chip">Precursores de peptídeos e proteínas</span>
+        <span class="chip">Componentes de vitaminas</span>
+        <span class="chip">Precursores de hormônios</span>
+        <span class="chip">Metabólitos intermediários</span>
+      </div>
+    </section>
+
+    <!-- 07 PROTEÍNAS -->
+    <section class="topic" id="proteinas">
+      <p class="eyebrow"><span class="n">07</span> · Polímeros de aminoácidos</p>
+      <h2>Proteínas</h2>
+      <p class="lead">Diferem dos carboidratos e das gorduras por conter <strong>nitrogênio</strong> na composição (~16%). São polímeros de aminoácidos (20 tipos) unidos por <strong>enlace peptídico</strong> — formado por condensação, com liberação de uma molécula de água (diferente do <strong>enlace glucosídico</strong>, que une monossacarídeos nos carboidratos).</p>
+
+      <h3>Estrutura</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Nível</th><th>Descrição</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Primária</td><td>Sequência linear de aminoácidos — determina como a proteína se dobra.</td></tr>
+            <tr><td class="k">Secundária</td><td>Arranjo local — hélices α e folhas β, estabilizadas por pontes de hidrogênio.</td></tr>
+            <tr><td class="k">Terciária</td><td>Conformação tridimensional completa, por interação entre grupos R.</td></tr>
+            <tr><td class="k">Quaternária</td><td>União de duas ou mais cadeias polipeptídicas (ex.: hemoglobina).</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Exemplo de proteína fibrosa: <strong>colágeno</strong>. Exemplo de proteína globular: <strong>hemoglobina</strong>.</p>
+
+      <h3>Funções</h3>
+      <ul class="twocol-list">
+        <li><strong>Reserva</strong> — ovoalbumina, caseína, zeína</li>
+        <li><strong>Contrátil</strong> — actina, miosina, flagelina, dineína</li>
+        <li><strong>Transporte</strong> — hemoglobina, mioglobina, citocromos, seroalbumina, lipoproteínas</li>
+        <li><strong>Hormonal/reguladora</strong> — insulina, glucagon, hormônio do crescimento (STH)</li>
+        <li><strong>Estrutural</strong> — colágeno, queratina, tubulina, histonas</li>
+        <li><strong>Homeostática</strong> — equilíbrio do pH interno</li>
+        <li><strong>Reconhecimento de sinais</strong> — receptores de membrana</li>
+        <li><strong>Protetora/defensiva</strong> — trombina, fibrinogênio, imunoglobulinas</li>
+        <li><strong>Enzimática</strong> — biocatalisadores das reações celulares</li>
+      </ul>
+
+      <h3>Classificação</h3>
+      <ul>
+        <li><strong>Pela forma:</strong> Fibrosas (helicoidal, laminar) e Globulares</li>
+        <li><strong>Pela composição — Simples:</strong> albuminas, globulinas, glutelinas, prolaminas, histonas, protaminas, escleroproteínas</li>
+        <li><strong>Pela composição — Conjugadas:</strong> glicoproteínas, fosfoproteínas, metaloproteínas, cromoproteínas, lipoproteínas, nucleoproteínas</li>
+        <li><strong>Pela importância nutricional:</strong> Completas (proteína animal) e Incompletas (proteína vegetal)</li>
+      </ul>
+      <p><strong>Mais frequentes:</strong> albuminas (solúveis, coagulam ao aquecer — clara de ovo), globulinas (insolúveis em água — fibrinogênio, anticorpos), colágenos (pele, ossos, cartilagem — viram gelatina por fervura), elastinas (tecido elástico de artérias e tendões), queratinas (pelos, unhas, penas).</p>
+
+      <h3>O que desnaturaliza as proteínas</h3>
+      <div class="box path">
+        <h4>Desnaturação proteica</h4>
+        <ul style="margin:0">
+          <li><strong>Aumento de temperatura</strong> — o calor rompe ligações fracas, alterando a estrutura.</li>
+          <li><strong>Mudanças de pH</strong> — desestabilizam interações iônicas.</li>
+          <li><strong>Agentes químicos</strong> — detergentes e álcoois interferem na estrutura proteica.</li>
+        </ul>
+        <p style="margin:10px 0 0"><strong>Consequência:</strong> perda da função biológica da proteína, afetando processos celulares e metabólicos.</p>
+      </div>
+
+      <h3>Excesso e deficiência</h3>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Excesso</h4>
+          <p style="margin:0">Parkinson, doenças coronárias, obesidade</p>
+        </div>
+        <div class="box">
+          <h4>Deficiência</h4>
+          <p style="margin:0">Anemia, hipoglicemia, perda de peso</p>
+        </div>
+      </div>
+
+      <h3>Kwashiorkor × Marasmo</h3>
+      <p>Alimentação pobre em proteínas (má nutrição proteica) é causa frequente de desnutrição:</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th></th><th>Kwashiorkor</th><th>Marasmo</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Causa</td><td>Dieta pobre em proteínas de boa qualidade, mas <strong>rica em carboidratos</strong></td><td><strong>Deficiência crônica de proteínas E calorias</strong> na dieta</td></tr>
+            <tr><td class="k">Sintomas</td><td>Edemas, anemia, hipoproteinemia, retardo do crescimento</td><td>Perda de peso, diminuição do tecido muscular e do tecido adiposo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 08 ENZIMAS -->
+    <section class="topic" id="enzimas">
+      <p class="eyebrow"><span class="n">08</span> · Catalisadores biológicos</p>
+      <h2>Enzimas</h2>
+
+      <h3>Composição</h3>
+      <p><strong>Apoenzima</strong> (parte proteica) + <strong>Cofator</strong> (porção não proteica) = <strong>Holoenzima</strong> (enzima completa). O cofator pode ser inorgânico (Cu²⁺, Fe²⁺/Fe³⁺, K⁺, Mg²⁺, Mn²⁺, Ni²⁺, Se, Zn²⁺) ou orgânico — coenzima ou grupo prostético (NADH, FADH₂, CoA-SH, FMN, Hemo, Biotina, TPP...).</p>
+
+      <h3>Modelo de Fisher (chave–fechadura)</h3>
+      <p>Primeiro modelo proposto para a interação enzima–substrato: a estrutura do substrato e a do sítio ativo seriam exatamente complementares — como uma chave que encaixa em uma fechadura.</p>
+
+      <h3>Modelo de Koshland (encaixe induzido)</h3>
+      <p>O sítio ativo é mais flexível que uma fechadura: a interação física entre enzima e substrato muda a geometria do centro ativo (distorção das superfícies moleculares), impondo tensão às moléculas reagentes e facilitando a reação.</p>
+
+      <h3>Sítio ativo — características</h3>
+      <ul>
+        <li>Ocupa pequena parte do volume total da enzima</li>
+        <li>Corresponde a uma cavidade/fenda na estrutura proteica</li>
+        <li>A especificidade da união depende da disposição dos átomos no centro ativo</li>
+        <li>O número de centros ativos é variável</li>
+      </ul>
+
+      <h3>Classificação das enzimas — função de cada uma</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Tipo de reação</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Oxidorredutases</td><td>Óxido-redução</td><td>Etanol → acetaldeído (glicólise / fermentação alcoólica)</td></tr>
+            <tr><td class="k">Transferases</td><td>Transferência de grupo de átomos entre moléculas</td><td>Creatina → creatina-fosfato (contração muscular)</td></tr>
+            <tr><td class="k">Hidrolases</td><td>Ruptura por adição de água</td><td>Liberação de glicose a partir do glicogênio</td></tr>
+            <tr><td class="k">Liases</td><td>Ruptura fora de hidrólise/oxidação</td><td>Liberação de histamina a partir de L-histidina</td></tr>
+            <tr><td class="k">Isomerases</td><td>Isomerização / união de múltiplas unidades</td><td>Formação de amido a partir de glicose</td></tr>
+            <tr><td class="k">Ligases</td><td>Formação de produto pela união de moléculas diferentes</td><td>Ativação de aminoácidos e união ao ARNt</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Fatores que influenciam a atividade enzimática</h3>
+      <ul>
+        <li><strong>Temperatura ótima</strong> — a maioria das enzimas humanas: 37–45 °C (ótimo em 37 °C). Acima de 45 °C: risco de desnaturação. Abaixo de 37 °C: atividade reduzida.</li>
+        <li><strong>pH ótimo</strong> — cada enzima tem seu pH ideal (ex.: pepsina ≈ 1,5; tripsina ≈ 7,7; catalase ≈ 7,6).</li>
+        <li><strong>Concentração de enzima e substrato</strong> — mais enzima gera mais produto até saturar o substrato disponível.</li>
+      </ul>
+      <p>As enzimas também não alteram o equilíbrio químico das reações — apenas aceleram a velocidade de chegada a ele — e são reguladas por hormônios como insulina, glucagon, adrenalina e CCK.</p>
+    </section>
+
+    <!-- 09 CARBOIDRATOS -->
+    <section class="topic" id="carboidratos">
+      <p class="eyebrow"><span class="n">09</span> · Fonte de energia</p>
+      <h2>Carboidratos</h2>
+      <p class="lead">Compostos orgânicos ternários formados por Carbono, Hidrogênio e Oxigênio. Constituem moléculas complexas (glicolipídios, ácidos nucleicos) e são a principal <strong>fonte de energia</strong> rápida do organismo (~4 kcal/g).</p>
+
+      <h3>Complexos × Simples</h3>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Complexos</h4>
+          <p style="margin:0">Decompõem-se lentamente, energia sustentada. Alimentos integrais, ricos em fibra.</p>
+        </div>
+        <div class="box">
+          <h4>Simples</h4>
+          <p style="margin:0">Decompõem-se rapidamente, picos de glicemia. Açúcares refinados/processados.</p>
+        </div>
+      </div>
+
+      <h3>Classificação</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Grupo</th><th>Descrição</th><th>Exemplos</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Monossacarídeos</td><td>3–7 átomos de C; solúveis em água, doces</td><td>Glicose, Galactose, Frutose</td></tr>
+            <tr><td class="k">Dissacarídeos</td><td>2 monossacarídeos, enlace glicosídico</td><td>Sacarose (glic.+frut.), Lactose (glic.+galact.), Maltose (glic.+glic.)</td></tr>
+            <tr><td class="k">Oligossacarídeos</td><td>3–10 monossacarídeos</td><td>—</td></tr>
+            <tr><td class="k">Polissacarídeos</td><td>Longas cadeias; insolúveis, sem sabor doce</td><td>Amido, Glicogênio, Celulose</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Galactose</strong> — componente da lactose, essencial para as células cerebrais. <strong>Frutose</strong> — "açúcar da fruta", o monossacarídeo mais doce, reserva de energia rápida.</p>
+
+      <h3>Polissacarídeos de reserva</h3>
+      <div class="grid-2">
+        <div class="box accent">
+          <h4>No ser humano (animais)</h4>
+          <p style="margin:0"><strong>Glicogênio</strong></p>
+        </div>
+        <div class="box accent">
+          <h4>Na planta</h4>
+          <p style="margin:0"><strong>Amido</strong></p>
+        </div>
+      </div>
+
+      <h3>Propriedades químicas</h3>
+      <p>Produzem energia celular; formam estruturas complexas; envolvem reações de hidrólise; são solúveis em água; apresentam isomeria.</p>
+
+      <h3>Principais alterações</h3>
+      <ul>
+        <li><strong>Intolerância a carboidratos</strong> (má absorção) — falta de enzimas para digerir lactose/frutose</li>
+        <li><strong>Diabetes Mellitus</strong> — tipo 1, tipo 2 e gestacional</li>
+        <li><strong>Pré-diabetes</strong> — glicose elevada, mas ainda não diabetes</li>
+        <li><strong>Galactosemia</strong> — acumulação de galactose, dano a fígado/olhos</li>
+        <li><strong>Glicogenose</strong> — acumulação anormal de glicogênio nos tecidos</li>
+      </ul>
+
+      <h3>Intolerância à lactose</h3>
+      <p>Deficiência ou ausência da enzima <strong>lactase</strong>, necessária para decompor a lactose em glicose e galactose.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Característica</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Deficiência congênita</td><td>Rara; recém-nascido já nasce sem produzir lactase — sintomas desde os primeiros dias</td></tr>
+            <tr><td class="k">Deficiência secundária</td><td>Comum em crianças pequenas; diarreias persistentes danificam a mucosa intestinal — temporária</td></tr>
+            <tr><td class="k">Deficiência primária (ontogenética)</td><td>Forma mais comum; a produção de lactase diminui gradualmente <strong>com o avanço da idade</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box path">
+        <h4>Intolerância à lactose × Alergia à proteína do leite de vaca (APLV)</h4>
+        <div class="tablewrap" style="margin:10px 0 0; border:none;">
+          <table>
+            <thead><tr><th></th><th>Intolerância à lactose</th><th>Alergia à leche de vaca (APLV)</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Natureza</td><td>Deficiência da enzima lactase — não digere o <strong>açúcar</strong> (lactose)</td><td>Reação <strong>imunológica</strong> às <strong>proteínas</strong> do leite (caseína, alfa-lactoalbumina, beta-lactoglobulina)</td></tr>
+              <tr><td class="k">Sintomas</td><td>Gastrointestinais: diarreia, gases, cólicas</td><td>Digestivos, cutâneos, respiratórios e até sangramento intestinal</td></tr>
+              <tr><td class="k">Relação com a idade</td><td>Genética ou adquirida; tende a <strong>piorar com a idade</strong></td><td>Mais agressiva em <strong>bebês</strong>; tende a <strong>diminuir com a idade</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3>Enzimas da digestão de carboidratos</h3>
+      <p><strong>Amilases</strong> (salivar e pancreática) iniciam a quebra do amido; <strong>lactase, sacarase e maltase</strong> (borda em escova intestinal) finalizam a digestão, convertendo dissacarídeos em monossacarídeos absorvíveis.</p>
+    </section>
+
+    <!-- 10 ÁCIDOS NUCLEICOS -->
+    <section class="topic" id="acidos-nucleicos">
+      <p class="eyebrow"><span class="n">10</span> · Material genético</p>
+      <h2>ADN e ARN</h2>
+      <p class="lead">Essenciais para a hereditariedade e a expressão genética — armazenam e transmitem a informação genética, e participam da biossíntese proteica.</p>
+
+      <h3>ADN — estrutura e função</h3>
+      <ul>
+        <li><strong>Dupla hélice estável</strong> — proporciona estabilidade e permite replicação eficaz.</li>
+        <li><strong>Nucleotídeo</strong> = fosfato + desoxirribose + base nitrogenada (Adenina, Timina, Citosina ou Guanina).</li>
+        <li><strong>Complementariedade de bases</strong> — Adenina–Timina e Citosina–Guanina, chave para a replicação precisa.</li>
+      </ul>
+
+      <h3>ARN — função e tipos</h3>
+      <p>O ARN atua na codificação, decodificação, regulação e expressão dos genes, podendo existir em cadeia simples ou estruturas mais complexas.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Função</th></tr></thead>
+          <tbody>
+            <tr><td class="k">mRNA (mensageiro)</td><td>Transporta a informação genética do ADN até os ribossomos, para a síntese de proteínas.</td></tr>
+            <tr><td class="k">tRNA (transferência)</td><td>Incorpora o aminoácido correto na cadeia, segundo o código do mRNA (via anticódon).</td></tr>
+            <tr><td class="k">rRNA (ribossômico)</td><td>Componente estrutural dos ribossomos; une mRNA e tRNA na tradução.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box warn">
+        <h4>Atenção</h4>
+        <p style="margin:0">Não existe uma enzima chamada "tradutor" — a tradução é realizada pelo <strong>ribossomo</strong> (rRNA + proteínas) em conjunto com o tRNA.</p>
+      </div>
+
+      <h3>Biossíntese do ADN (replicação)</h3>
+      <ol>
+        <li><strong>Iniciação</strong> — a helicase desenrola a dupla hélice, separando as cadeias.</li>
+        <li><strong>Elongação</strong> — a ADN polimerase sintetiza novas cadeias, adicionando nucleotídeos complementares.</li>
+        <li><strong>Terminação</strong> — completa-se a replicação, formando duas moléculas de ADN idênticas.</li>
+      </ol>
+
+      <h3>Expressão gênica</h3>
+      <ol>
+        <li><strong>Transcrição</strong> — o ADN é transcrito para formar ARN mensageiro.</li>
+        <li><strong>Processamento</strong> — o mRNA sofre modificações pós-transcricionais (corte/emenda) até a forma madura.</li>
+        <li><strong>Tradução</strong> — o mRNA é traduzido em proteína nos ribossomos, com os aminoácidos ensamblados conforme a sequência do ARN.</li>
+      </ol>
+    </section>
+
+    <!-- 11 LIPÍDIOS -->
+    <section class="topic" id="lipidios">
+      <p class="eyebrow"><span class="n">11</span> · Reserva energética e membranas</p>
+      <h2>Lipídios</h2>
+
+      <h3>Características gerais</h3>
+      <ul>
+        <li><strong>Diversidade de formas</strong> — gorduras, óleos, ceras, hormônios sexuais.</li>
+        <li><strong>Insolúveis em água</strong> — essencial para a função de barreira das membranas.</li>
+        <li><strong>Solúveis em solventes orgânicos</strong> — éter, clorofórmio, benzeno, álcool.</li>
+        <li><strong>Estrutura química de ésteres</strong> — formados pela reação entre um ácido graxo e um álcool.</li>
+      </ul>
+
+      <h3>Classificação</h3>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Simples</h4>
+          <p style="margin:0">Apenas C, H, O. Ex.: gorduras e ceras.</p>
+        </div>
+        <div class="box">
+          <h4>Complexos</h4>
+          <p style="margin:0">C, H, O + N, P, S ou outra biomolécula. Ex.: fosfolipídios, glicolipídios, sulfolipídios, aminolipídios.</p>
+        </div>
+        <div class="box accent">
+          <h4>Saponificáveis</h4>
+          <p style="margin:0">Contêm ácidos graxos. Simples (triacilglicerídeos, ceras) e complexos (fosfoglicerídeos, esfingolipídios).</p>
+        </div>
+        <div class="box accent">
+          <h4>Insaponificáveis</h4>
+          <p style="margin:0">Sem ácidos graxos. Terpenos, esteroides, eicosanoides.</p>
+        </div>
+      </div>
+
+      <h3>Função de cada tipo (saponificáveis)</h3>
+      <ul>
+        <li><strong>Reserva de energia</strong> — ácidos graxos e triacilglicerídeos armazenam calorias.</li>
+        <li><strong>Isolante térmico</strong> — baixa condutividade térmica, minimiza perda de calor.</li>
+        <li><strong>Estrutural</strong> — fosfolipídios nas membranas celulares.</li>
+        <li><strong>Impermeabilizantes</strong> — ceras, como na cutícula das folhas.</li>
+      </ul>
+
+      <h3>Função dos fosfolipídios</h3>
+      <p>Junto ao colesterol e aos esfingolipídios, são o principal elemento estrutural das membranas biológicas. Atuam também na <strong>comunicação celular</strong> (fosfoinositóis como segundos mensageiros), como fonte de energia calórica, ativadores enzimáticos, componente dos ácidos biliares (solubilizam colesterol) e precursores de tromboxanos, leucotrienos e prostaglandinas.</p>
+
+      <h3>Classificação funcional (insaponificáveis)</h3>
+      <p class="mono" style="color:var(--text-muted); font-size:13px;">Esteroles → Ácidos biliares → Hormônios sexuais → Glicosídeos cardíacos → Saponinas</p>
+
+      <h3>Esteroides — função de cada um</h3>
+      <ul>
+        <li><strong>Ácidos biliares</strong> — derivados do colesterol; emulsionam gorduras no intestino delgado, essenciais para a digestão e absorção de lipídios.</li>
+        <li><strong>Hormônios sexuais</strong> — estrógenos e testosterona; responsáveis pelas características sexuais primárias e secundárias e por funções reprodutivas (ovulação, ciclo menstrual, produção de espermatozoides).</li>
+        <li><strong>Glicosídeos cardíacos</strong> — usados como medicamentos; efeitos positivos no coração.</li>
+        <li><strong>Saponinas</strong> — componentes vegetais com propriedades diuréticas e antioxidantes.</li>
+      </ul>
+
+      <div class="box path">
+        <h4>Testosterona e efeitos dos anabolizantes</h4>
+        <p>Os anabolizantes aumentam a síntese de proteínas musculares, gerando crescimento muscular rápido — por isso muito usados (indevidamente) por atletas e fisiculturistas.</p>
+        <p style="margin-bottom:0"><strong>Efeitos adversos:</strong> atrofia testicular (supressão da produção natural de testosterona), icterícia (sobrecarga hepática), arritmia cardíaca, esterilidade, pele oleosa nas mulheres, náuseas e vômitos frequentes, efeito teratogênico, e em casos extremos, morte.</p>
+      </div>
+
+      <h3>Ácidos graxos</h3>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Saturados</h4>
+          <p style="margin:0">Só ligações simples. Ex.: palmítico (16C), esteárico (18C). <strong>Sólidos</strong> à temperatura ambiente.</p>
+        </div>
+        <div class="box">
+          <h4>Insaturados</h4>
+          <p style="margin:0">Uma ou mais ligações duplas. Ex.: oleico (18C, 1 dupla), linoleico (18C, 2 duplas). <strong>Líquidos</strong> à temperatura ambiente.</p>
+        </div>
+      </div>
+
+      <h3>Digestão de lipídios</h3>
+      <p><strong>Início na boca</strong> — a lipase lingual começa a decompor triglicerídeos em ácidos graxos e glicerol (efeito limitado). <strong>No estômago</strong> — a lipase gástrica atua sobre as gorduras já emulsionadas, aumentando a atividade com a acidez gástrica. <strong>No intestino delgado</strong> — a digestão se completa com a ação enzimática e a emulsificação pela bile.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Enzima</th><th>Local</th><th>Ação</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Lipase</td><td>Pâncreas</td><td>Hidrólise das ligações éster do glicerol nas gorduras neutras (triacilgliceróis)</td></tr>
+            <tr><td class="k">Isomerase</td><td>Intestino</td><td>Converte 2-monoacilglicerol (2-MAG) em 1-MAG, permitindo sua hidrólise pela lipase</td></tr>
+            <tr><td class="k">Fosfolipase A2</td><td>Pâncreas</td><td>Hidrolisa os glicerofosfolipídios</td></tr>
+            <tr><td class="k">Colesterolase</td><td>Intestino</td><td>Hidrolisa ésteres de colesterol, liberando colesterol livre e ácidos graxos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Papel da bile:</strong> emulsifica as gorduras — os ácidos biliares (cólico e quenodesoxicólico) quebram as grandes gotas de gordura em partículas menores, aumentando a superfície de contato para a digestão enzimática. <strong>Absorção:</strong> os produtos finais (ácidos graxos e glicerol) atravessam o epitélio intestinal por difusão e transporte ativo.</p>
+
+      <h3>Lipoproteínas — função de cada uma</h3>
+      <div class="box accent">
+        <div class="tablewrap" style="margin:0; border:none;">
+          <table>
+            <thead><tr><th>Lipoproteína</th><th>Função principal</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Quilomícrons</td><td>Transportam triglicerídeos, fosfolipídios e colesterol <strong>da dieta</strong>, do intestino aos tecidos (via linfática).</td></tr>
+              <tr><td class="k">VLDL</td><td>Transportam triglicerídeos <strong>do fígado</strong> para os tecidos; ao liberá-los, convertem-se em LDL.</td></tr>
+              <tr><td class="k">LDL</td><td>Transportam colesterol <strong>para os tecidos</strong> — "colesterol ruim"; em excesso, acumula-se nas artérias.</td></tr>
+              <tr><td class="k">HDL</td><td>Transportam colesterol <strong>dos tecidos de volta ao fígado</strong> — "colesterol bom", papel protetor cardiovascular.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 VITAMINAS -->
+    <section class="topic" id="vitaminas">
+      <p class="eyebrow"><span class="n">12</span> · Micronutrientes</p>
+      <h2>Vitaminas</h2>
+
+      <div class="grid-2">
+        <div class="box accent">
+          <h4>Lipossolúveis</h4>
+          <p style="margin:0">A, D, E, K</p>
+        </div>
+        <div class="box">
+          <h4>Hidrossolúveis</h4>
+          <p style="margin:0">C, complexo B (B1, B2, B3, B5, B6, B7, B9, B12)</p>
+        </div>
+      </div>
+      <p><strong>Hipovitaminose</strong> = carência de vitaminas. Causas: ingestão insuficiente nos alimentos; má absorção intestinal (ou destruição antes da absorção); aumento das necessidades do organismo. A vitamina hidrossolúvel excedente é eliminada na urina — exceto a <strong>B12</strong>, que pode se armazenar no fígado por anos.</p>
+
+      <h3>Vitamina × Hipovitaminose (quadro-resumo)</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Vitamina</th><th>Tipo</th><th>Doença/sinal por deficiência</th></tr></thead>
+          <tbody>
+            <tr><td class="k">A</td><td>Lipossolúvel</td><td>Cegueira noturna (nictalopia) / xeroftalmia</td></tr>
+            <tr><td class="k">B1 — Tiamina</td><td>Hidrossolúvel</td><td>Beribéri</td></tr>
+            <tr><td class="k">B2 — Riboflavina</td><td>Hidrossolúvel</td><td>Glossite, anemia</td></tr>
+            <tr><td class="k">B3 — Niacina</td><td>Hidrossolúvel</td><td>Pelagra</td></tr>
+            <tr><td class="k">B6 — Piridoxina</td><td>Hidrossolúvel</td><td>Anemia sideroblástica</td></tr>
+            <tr><td class="k">B9 — Ácido fólico</td><td>Hidrossolúvel</td><td>Anemia megaloblástica; espinha bífida (feto)</td></tr>
+            <tr><td class="k">B12 — Cobalamina</td><td>Hidrossolúvel</td><td>Alterações neurológicas</td></tr>
+            <tr><td class="k">D — Calciferol</td><td>Lipossolúvel</td><td>Raquitismo, osteoporose</td></tr>
+            <tr><td class="k">C — Ác. ascórbico</td><td>Hidrossolúvel</td><td>Escorbuto</td></tr>
+            <tr><td class="k">K</td><td>Lipossolúvel</td><td>Sangramento (evita hemorragia em recém-nascidos)</td></tr>
+            <tr><td class="k">E</td><td>Lipossolúvel</td><td>Anemia hemolítica</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Vitamina A</h3>
+      <p><strong>Fontes:</strong> preformada (carne, peixe, aves, lácteos) e precursores/provitamina A — betacaroteno (vegetais e frutas).</p>
+      <p><strong>Funções:</strong> visão (forma a rodopsina/púrpura visual na retina), sistema imunitário, crescimento e reprodução, antioxidante, desintoxicação (citocromo P450).</p>
+      <div class="box path">
+        <h4>Deficiência → Cegueira noturna (nictalopia) / Xeroftalmia</h4>
+        <p style="margin:0">Ressecamento e dano da córnea, podendo evoluir a dano irreversível.</p>
+      </div>
+
+      <h3>Vitamina B1 (Tiamina)</h3>
+      <p>Ajuda a converter carboidratos em energia; papel na contração muscular e condução nervosa.</p>
+      <div class="box path">
+        <h4>Deficiência → Beribéri</h4>
+        <p style="margin:0">Do cingalês "debilidade extrema" — dano ao sistema nervoso e ao coração, podendo ser grave e potencialmente mortal.</p>
+      </div>
+
+      <h3>Vitamina B2 (Riboflavina)</h3>
+      <p>Atua no metabolismo de carboidratos, gorduras e proteínas; ajuda (com B6) a converter triptofano em ácido nicotínico.</p>
+      <div class="box path">
+        <h4>Deficiência (3–8 meses)</h4>
+        <p style="margin:0">Queilite angular, <strong>glossite</strong> (língua magenta), edema na mucosa oral, dermatite genital, <strong>anemia</strong>, sinais neurológicos; em casos severos, cataratas irreversíveis.</p>
+      </div>
+
+      <h3>Vitamina B3 (Niacina)</h3>
+      <p>Forma coenzimas NAD⁺/NADP⁺, essenciais no metabolismo energético (glicólise, ciclo de Krebs, beta-oxidação).</p>
+      <div class="box path">
+        <h4>Deficiência grave → Pelagra ("doença dos 3 D")</h4>
+        <p style="margin:0"><strong>D</strong>iarreia, <strong>D</strong>ermatite, <strong>D</strong>emência. Nome do italiano "pelle agra" (pele áspera/dolorosa); descrita por Gaspar Casal em 1730 (Astúrias).</p>
+      </div>
+
+      <h3>Vitamina B6 (Piridoxina)</h3>
+      <p>Coenzima PLP — metabolismo de aminoácidos, neurotransmissores (serotonina, GABA), glicogênio, heme.</p>
+      <div class="box path">
+        <h4>Deficiência</h4>
+        <p style="margin:0">Neuropatia periférica, dermatite, glossite e <strong>anemia sideroblástica</strong>.</p>
+      </div>
+
+      <h3>Ácido fólico (Vitamina B9)</h3>
+      <p>Coenzima (tetrahidrofolato) na síntese de ADN, purinas e pirimidinas; essencial antes da concepção e no 1º trimestre de gravidez para a formação do tubo neural.</p>
+      <div class="box path">
+        <h4>Deficiência → Anemia megaloblástica e Espinha bífida</h4>
+        <p style="margin:0"><strong>Anemia megaloblástica</strong> — glóbulos vermelhos grandes, imaturos e disfuncionais. No feto, a deficiência causa defeitos do tubo neural: <strong>espinha bífida</strong> (fechamento anormal da porção inferior) e <strong>anencefalia</strong> (fechamento anormal da porção superior).</p>
+      </div>
+
+      <h3>Vitamina B12 (Cobalamina)</h3>
+      <p>Participa da síntese de ADN/ARN, formação de glóbulos vermelhos e funcionamento do sistema nervoso.</p>
+      <div class="box path">
+        <h4>Deficiência → Alterações neurológicas</h4>
+        <p style="margin:0">Desmielinização dos cordões da medula espinhal; parestesias, entumecimento; alterações mentais como demência (tipo Alzheimer), psicose e esquizofrenia paranoide, podendo chegar ao coma.</p>
+      </div>
+
+      <h3>Vitamina D (Calciferol)</h3>
+      <p>Absorção intestinal de cálcio e fósforo; síntese cutânea a partir da luz solar (raios UV).</p>
+      <div class="box path">
+        <h4>Deficiência → Raquitismo / Osteoporose</h4>
+        <p style="margin:0">Também associada à osteomalacia — falha na fixação de cálcio/fósforo nos ossos.</p>
+      </div>
+
+      <h3>Vitamina C (Ácido ascórbico)</h3>
+      <p>Hidrossolúvel e termolábil; coenzima em reações de hidroxilação; antioxidante; facilita absorção de ferro; formação do colágeno.</p>
+      <div class="box path">
+        <h4>Deficiência → Escorbuto</h4>
+        <p style="margin:0">Hemorragias gengivais, amolecimento ósseo, debilidade muscular, pele áspera e descamativa.</p>
+      </div>
+
+      <h3>Vitamina K</h3>
+      <p>Essencial para a coagulação sanguínea.</p>
+      <div class="box path">
+        <h4>Deficiência → Evita sangramento em recém-nascidos</h4>
+        <p style="margin:0">A injeção de vitamina K ao nascer previne a <strong>doença hemorrágica do recém-nascido</strong> — o bebê tem baixa reserva porque a vitamina K não atravessa bem a placenta e o leite materno tem baixo teor dela.</p>
+      </div>
+
+      <h3>Vitamina E</h3>
+      <p>Antioxidante; protege membranas celulares.</p>
+      <div class="box path">
+        <h4>Deficiência → Anemia hemolítica</h4>
+        <p style="margin:0">Também miopatia, neuropatia periférica e dano à retina (retinopatia). Os glóbulos vermelhos se destroem antes do tempo normal (~120 dias).</p>
+      </div>
+    </section>
+
+    <footer>
+      Resumo elaborado a partir dos slides de Bioquímica I (Dra. Mara Gonçalves Vichietti) — conteúdo original majoritariamente em espanhol, traduzido e organizado por tema.
+    </footer>
+  </main>
+</div>
+
+<a href="#top" class="backtotop" id="backtotop" aria-label="Voltar ao topo">↑</a>
+
+<script>
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
+    var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    var backBtn = document.getElementById('backtotop');
+
+    function onScroll(){
+      var pos = window.scrollY + 120;
+      var current = sections[0];
+      for (var i = 0; i < sections.length; i++){
+        if (sections[i].offsetTop <= pos) current = sections[i];
+      }
+      links.forEach(function(a){ a.classList.remove('active'); });
+      if (current){
+        var match = links.find(function(a){ return a.getAttribute('href') === '#' + current.id; });
+        if (match) match.classList.add('active');
+      }
+      backBtn.classList.toggle('show', window.scrollY > 500);
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
